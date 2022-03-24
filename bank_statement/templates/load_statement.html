@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title %}Выписка{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <h2>Загрузка банковской выписки</h2>
+            <p class="lead">Выберите файл и нажмите кнопку приступить к обработке</p>
+            {% if request.session.amount %}
+            <p class="lead">{{ request.session.amount }} GEL</p>
+            {% endif %}
+        </div>
+    <form class="form-signin" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row justify-content-md-center">
+                 <div class="col-3">{{ form.file|as_crispy_field }}<br><button class="btn btn-primary" type="submit">Приступить к обработке выписки</button></div>
+            </div>
+        </div>
+    </form>
+    </main>
+
+</div>
+{% endblock %}

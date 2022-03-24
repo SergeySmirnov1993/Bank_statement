@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block body %}
+<body>
+<div class="py-5 text-center">
+    <h2>Форма регистрации:</h2>
+    <p class="lead">{{ html }}</p>
+</div>
+<form class="form-signin" method="post">
+<div class="row g-5">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group mb-2">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-3">
+                    <p class="lead">ID пользователя</p>
+                </div>
+                <div class="col">
+                    {{ form.user_id|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-2">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-3">
+                    <p class="lead">Пароль</p>
+                </div>
+                <div class="col">
+                    {{ form.password1|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-2">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-3">
+                    <p class="lead">Повторите пароль</p>
+                </div>
+                <div class="col">
+                    {{ form.password2|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-2">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-3 text-end">
+                    <a class="btn btn-secondary" href="{% url 'login'%}">Войти</a>
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</body>
+{% endblock %}

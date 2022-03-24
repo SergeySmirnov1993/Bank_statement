@@ -1,0 +1,92 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <h2>Личные данные:</h2>
+            <p class="lead">Информация о пользователе</p>
+            {% if html %}
+            <p class="lead">{{html}}</p>
+            {% endif %}
+        </div>
+        <form class="form-signin" method="post">
+            <div class="row g-5">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group mb-2">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-3">
+                                <p class="lead">Имя пользователя</p>
+                            </div>
+                            <div class="col">
+                                {{ form.username|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-3">
+                                <p class="lead">Email</p>
+                            </div>
+                            <div class="col">
+                                {{ form.email|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-2">
+                                <p class="lead">Телефон</p>
+                            </div>
+                            <div class="col-1 text-end">
+                                <p class="lead">+995</p>
+                            </div>
+                            <div class="col">
+                                <div class="input-group mb-2">
+                                 {{ form.telephone }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group mb-2">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-3">
+                                <p class="lead">Банк</p>
+                            </div>
+                            <div class="col">
+                                {{ form.bank|as_crispy_field }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group mb-2">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-3"></div>
+                            {% if user.profile %}
+                            <div class="col-3">
+                                <button class="btn btn-primary" type="submit">Сохранить изменения</button>
+                            </div>
+                            {% else %}
+                            <div class="col-3">
+                                <button class="btn btn-primary" type="submit">Сохранить</button>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+
+</div>
+{% endblock %}
