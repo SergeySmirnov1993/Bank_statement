@@ -1,0 +1,89 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block manager %}
+
+<form class="form-signin" method="post">
+    <div class="row g-5">
+        {% csrf_token %}
+        <div class="py-5 text-center">
+            <h2>Личные данные:</h2>
+            <p class="lead">Информация о пользователе</p>
+            {% if html %}
+            <p class="lead">{{html}}</p>
+            {% endif %}
+        </div>
+        <div class="form-row">
+            <div class="form-group mb-2">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                        <p class="lead">ID</p>
+                    </div>
+                    <div class="col">
+                        {{ form.user_id|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-2">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                        <p class="lead">Пароль</p>
+                    </div>
+                    <div class="col">
+                        {{ form.password|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-2">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                        <p class="lead">Активен</p>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            {{ form.is_active }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group mb-2">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                        <p class="lead">Сумма по выписке</p>
+                    </div>
+                    <div class="col">
+                        {{ form.sum_total|as_crispy_field }}
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group mb-2">
+                <div class="row">
+                    <div class="col-5 text-end">
+                        <a class="btn btn-dark" href="{% url 'add-file' user_id=user_id %}">Добавить файл</a>
+                    </div>
+                    <div class="col-1 text-end">
+                        <a class="btn btn-secondary" href="{% url 'view-users'%}">Вернуться</a>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary" type="submit">Сохранить изменения</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-5 text-center">
+            <p class="lead">Список фалов:</p>
+            {%for file in files%}
+            <p class="lead">{{file}}</p>
+            {%endfor%}
+        </div>
+    </div>
+</form>
+{% endblock %}
