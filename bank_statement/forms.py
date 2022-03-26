@@ -1,5 +1,6 @@
 from django import forms
 
+
 from bank_statement.bl.validators import id_validation, password_validation, telephone_validation
 
 
@@ -26,3 +27,15 @@ class SignUp(forms.Form):
 
 class LoadStatement(forms.Form):
     file = forms.FileField(label='')
+
+
+class MangersForm(forms.Form):
+    user_id = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'ID номер'}), validators=[id_validation, ])
+    password = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Пароль'}), min_length=5, max_length=20, required=False)
+    is_active = forms.BooleanField(label='Активен', required=False)
+    sum_total = forms.FloatField(label='', required=False)
+
+
+class LoadFile(forms.Form):
+    file = forms.FileField(label='')
+

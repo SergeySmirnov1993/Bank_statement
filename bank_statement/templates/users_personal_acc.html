@@ -13,7 +13,11 @@
             <p class="lead">{{html}}</p>
             {% endif %}
         </div>
+        {% if user.profile %}
+        <form class="form-signin" method="post" action="update-profile">
+        {% else %}
         <form class="form-signin" method="post">
+        {% endif %}
             <div class="row g-5">
                 {% csrf_token %}
                 <div class="form-row">

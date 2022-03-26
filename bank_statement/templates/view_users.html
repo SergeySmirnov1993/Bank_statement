@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block manager %}
+<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
+    <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+        <p class="lead">Список зарегистрированных пользователей:</p>
+    </a>
+    {% for user in users %}
+    <div class="list-group list-group-flush border-bottom scrollarea">
+      <a href="{% url 'edit-user' user_id=user.id %}" class="list-group-item list-group-item-action py-3 lh-tight">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">
+              {%if user.profile %}
+              {{user.profile.username}}
+              {% endif %}
+              ID={{user.username}}
+          </strong>
+          <small class="text-muted">Дата добавления последнй выписки: {%if user.statement%}{% if user.statement.add_date %}{{user.statement.add_date}}{%else%}Информация отсутсвует{%endif%}{%else%}Выписки не добавлялись{%endif%} </small>
+        </div>
+        <div class="col-10 mb-1 small">Пароль: {%if user.profile%}{{user.profile.password}}{%else%}Провиль не заполнен{%endif%}</div>
+        <div class="col-10 mb-1 small">Активен: {%if user.profile%}{% if user.profile.is_active %}Да{%else%}Нет{%endif%}{%else%}Провиль не заполнен{%endif%}</div>
+        <div class="col-10 mb-1 small">Сумма за текущий месяц: {%if user.statement%}{% if user.statement.sum_total %}{{user.statement.sum_total}} GEL{%else%}Информация отсутсвует{%endif%}{%else%}Выписки не добавлялись{%endif%}</div>
+      </a>
+    </div>
+    {%endfor%}
+  </div>
+{% endblock %}

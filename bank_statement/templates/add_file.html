@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title %}Добавление файла{% endblock %}
+
+{% block manager %}
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <p class="lead">Загрузить документ</p>
+            {%if msg%}
+            {{msg}}
+            {%endif%}
+
+            <form class="form-signin" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-3">{{ file_form.file|as_crispy_field }}<br>
+                            <button class="btn btn-primary" type="submit">Загрузить</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+</div>
+{% endblock %}
+

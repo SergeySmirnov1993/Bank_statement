@@ -30,9 +30,10 @@
                 <div class="col-3">
                     <p class="lead">Пароль</p>
                 </div>
-                <div class="col">
+                <div class="col-2">
                     {{ form.password1|as_crispy_field }}
                 </div>
+                <div class="col"></div>
             </div>
         </div>
         <div class="form-group mb-2">
@@ -41,21 +42,27 @@
                 <div class="col-3">
                     <p class="lead">Повторите пароль</p>
                 </div>
-                <div class="col">
+                <div class="col-2">
                     {{ form.password2|as_crispy_field }}
                 </div>
+                <div class="col"></div>
             </div>
         </div>
         <div class="form-group mb-2">
             <div class="row">
                 <div class="col-3"></div>
                 <div class="col-3 text-end">
-                    <a class="btn btn-secondary" href="{% url 'login'%}">Войти</a>
+                    <a class="btn btn-secondary" href="{% url 'login'%}?next={% url 'users-acc' %}">Войти</a>
                 </div>
                 <div class="col">
                     <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
                 </div>
             </div>
+        </div>
+        <div class="container text-center">
+            <br>
+            <p class="lead">Примечание: пароль должен содержать буквы (A-z) верхний и нижний регистр, цифры.<br> Минимальная длина 8 символов.</p>
+        <p class="lead"></p>
         </div>
     </div>
 </div>
